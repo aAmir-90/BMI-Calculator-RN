@@ -62,12 +62,12 @@ const Index = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "#e0ecde",
     padding: Constants.statusBarHeight,
     justifyContent: "center",
   },
   title: {
-    color: "white",
+    backgroundColor: "#2c6975",
     fontSize: 20,
     height: 80,
     justifyContent: "center",
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
     fontStyle: "italic",
+    textAlign: "center",
   },
   input: {
     height: 55,
