@@ -1,59 +1,69 @@
 import {
   View,
-  TextInput,
-  StyleSheet,
   Text,
+  StyleSheet,
+  TextInput,
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
 import Constants from "expo-constants";
 
-const Index = () => {
+const BmiCalculate = () => {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [bmi, setBmi] = useState("");
-  const [description, setDescription] = useState("");
+  const [decsription, setDescription] = useState("");
 
-  const calculateBMI = () => {
+  const calculateBmi = () => {
     const bmi = weight / ((height / 100) * (height / 100));
     setBmi(bmi.toFixed(1));
 
-    if (bmi < 18.5) {
-      setDescription("underweight, eat more!");
-    } else if (bmi >= 18.5 && bmi <= 24.9) {
-      setDescription("Normal, keep it up!!");
-    } else if (bmi >= 25 && bmi <= 29.9) {
-      setDescription("Overweight, start workout....!!");
-    } else if (bmi >= 30) {
-      setDescription("Obese, Hit the gym and increase Diet");
+    switch (true) {
+      case bmi < 18.5:
+        setDescription("Underweight, increase diet");
+        break;
+      case bmi >= 18.5 && bmi <= 24.9:
+        setDescription("Normal, Keep it up!!");
+        break;
+      case bmi > 25 && bmi <= 29.9:
+        setDescription("OverWeight, Hit the gym hard and eat healthy!!");
+        break;
+      case bmi > 30:
+        setDescription("Obese, Go for workout and keep your diet clean!!");
+        break;
+
+      default:
+        setDescription("Invalid BMI");
+        break;
     }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-        <Text style={styles.titleText}>BMI Calculator</Text>
+        <Text style={styles.titleText}>Bmi Calculator</Text>
       </View>
       <TextInput
         style={styles.input}
         value={weight}
-        placeholder="Weight in CM"
+        placeholder="Weight in kg"
         keyboardType="number"
         onChangeText={(text) => setWeight(text)}
       />
       <TextInput
         style={styles.input}
         value={height}
-        placeholder="Height in CM"
+        placeholder="Height in kg"
         keyboardType="number"
         onChangeText={(text) => setHeight(text)}
       />
-      <TouchableOpacity style={styles.button} onPress={calculateBMI}>
+
+      <TouchableOpacity style={styles.button} onPress={calculateBmi}>
         <Text style={styles.btnText}>Calculate</Text>
       </TouchableOpacity>
       <View style={styles.resultView}>
         <Text style={styles.result}>{bmi}</Text>
-        <Text style={styles.result}>{description}</Text>
+        <Text style={styles.result}>{decsription}</Text>
       </View>
     </View>
   );
@@ -63,8 +73,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#e0ecde",
-    padding: Constants.statusBarHeight,
     justifyContent: "center",
+    padding: Constants.statusBarHeight,
   },
   title: {
     backgroundColor: "#2c6975",
@@ -116,4 +126,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Index;
+export default BmiCalculate;
